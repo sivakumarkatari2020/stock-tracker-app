@@ -1,0 +1,57 @@
+//TO GET COMPANY NAMES AVAILABLE IN DATABASE
+  "SELECT stock_name from tbl_master_entries"
+
+//TO GET THE COLUMN NAMES OF THE DATABASE
+  " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'tbl_master_entries' "
+  " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'tbl_master_entries' && (COLUMN_NAME = 'stock_name' || COLUMN_NAME = 'spot_price' || COLUMN_NAME = 'start_time' || COLUMN_NAME = 'positional_range' || COLUMN_NAME = 'call_neg_count' || COLUMN_NAME = 'put_neg_count' || COLUMN_NAME = 'first_10_oi_sum_ratio' || COLUMN_NAME = 'first_10_oi_change_sum_ratio' || COLUMN_NAME = 'first_5_oi_sum_ratio' || COLUMN_NAME = 'first_5_oi_change_sum_ratio' || COLUMN_NAME = 'OI_Ratio' || COLUMN_NAME = 'vol_Ratio' || COLUMN_NAME = 'max_call_chng_oi' || COLUMN_NAME = 'max_put_oi' || COLUMN_NAME = 'max_pain_put' || COLUMN_NAME = 'min_pain_put' || COLUMN_NAME = '' ||) "
+
+//TO GET THE DATABASE OF SELECTED STOCK & DATE
+  " SELECT * FROM tbl_master_entries WHERE stock_name='' && start_date='' "
+
+//TO GET THE DISTINCT DATES FROM DATABASE OF A PARTICULAR stock
+  " SELECT distinct(start_date) FROM tbl_master_entries WHERE stock_name=''; "
+
+//TO GET THE DATA FOR EVERY SELECTED STOCK WITH SELECTED DATE
+  " SELECT * FROM tbl_master_entries WHERE stock_name='PEL'; "
+
+//COLUMNS TO GET DATA
+
+1 . stock_name, 
+2 . spot_price, 
+3 . start_time, 
+4 . positional_range, 
+5 . call_neg_count, 
+6 . put_neg_count, 
+7 . first_10_oi_sum_ratio, 
+8 . first_10_oi_change_sum_ratio, 
+9 . first_5_oi_sum_ratio, 
+10 . first_5_oi_change_sum_ratio, 
+11 . put_total_oi/call_total_oi AS OI_Ratio, 
+12 . put_total_volume/call_total_volume AS vol_Ratio, 
+13 . max_call_chng_oi, 
+14 . max_put_chng_oi, 
+15 . max_call_oi, 
+16 . max_put_oi,
+17 . max_pain_put, 
+18 . min_pain_put, 
+19 . max_pain_put_str_prc, 
+20 . min_pain_put_str_prc, 
+21 . max_pain_call, 
+22 . min_pain_call, 
+23 . max_pain_call_str_prc, 
+24 . min_pain_call_str_prc
+
+//COLUMNS TO DRAW THE GRAPHS
+
+1 . first_10_oi_sum_ratio, 
+2 . first_10_oi_change_sum_ratio, 
+3 . first_5_oi_sum_ratio, 
+4 . first_5_oi_change_sum_ratio, 
+5 . put_total_oi/call_total_oi AS OI_Ratio, 
+6 . put_total_volume/call_total_volume AS vol_Ratio, 
+7 . max_call_chng_oi, 
+8 . max_put_chng_oi,  
+9 . min_pain_put, 
+10 . min_pain_call
+11 . put_total_oi + call_total_oi
+12 . max_call_chng_oi + max_put_chng_oi
