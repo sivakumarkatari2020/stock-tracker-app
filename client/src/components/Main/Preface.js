@@ -114,12 +114,11 @@ const formStyles = makeStyles((theme)=>({
 }))
 
 function Preface(props) {
-    const {stock,date,stockList,dateList,setDateList,selectedStock,selectedDate,getData} = props;
+    const {stock,date,stockList,dateList,selectedStock,selectedDate,getData} = props;
 
     const classes = useStyles();
     const forms = formStyles();
 
-    const [isStockselected, selectStock] = useState(false);
     const [openStock, setOpenStock] = useState(false);
     const [openDate, setOpenDate] = useState(false);
     const [isValuesObtained,gotValues] = useState(false);
@@ -160,19 +159,6 @@ function Preface(props) {
                             onChange={(event) => {
                                 let val = event.target.value;
                                 selectedStock(val);
-                                selectStock(true);
-
-                                let url = `http://localhost:5000/stockDates/${val}`;
-                                console.log(url);
-                                axios.get(url)
-                                .then((response)=> response.data)
-                                .then((result)=>{
-                                    let arr = [];
-                                    for(let i=0;i<result.length;i++){
-                                        arr.push(result[i].start_date);
-                                    }
-                                    setDateList(arr);
-                                })
                             }} 
                             className={classes.selectionBox}
                         >
@@ -184,46 +170,29 @@ function Preface(props) {
                             }
                         </Select>
                 </FormControl>
-                {
-                    isStockselected
-                    ? <FormControl className={forms.formControl}>
-                        <InputLabel id="demo-simple-select-helper-label">SELECT START DATE</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                open={openDate}
-                                onClose={() => {setOpenDate(false);}}
-                                onOpen={() => {setOpenDate(true);}}
-                                value={date}
-                                onChange={(event) => {
-                                    selectedDate(event.target.value);
-                                    gotValues(true);
-                                }}
-                                className={classes.selectionBox}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                {
-                                dateList.map((item) => <MenuItem value={item} key={item}>{item}</MenuItem>)
-                                }
-                            </Select>
-                    </FormControl>
-                    : <FormControl className={classes.formControl} disabled>
-                        <InputLabel id="demo-simple-select-disabled-label">SELECT START DATE</InputLabel>
+                <FormControl className={forms.formControl}>
+                    <InputLabel id="demo-simple-select-helper-label">SELECT START DATE</InputLabel>
                         <Select
-                            labelId="demo-simple-select-disabled-label"
-                            id="demo-simple-select-disabled"
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            open={openDate}
+                            onClose={() => {setOpenDate(false);}}
+                            onOpen={() => {setOpenDate(true);}}
                             value={date}
-                            onChange={()=>{}}
+                            onChange={(event) => {
+                                selectedDate(event.target.value);
+                                gotValues(true);
+                            }}
                             className={classes.selectionBox}
                         >
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
+                            {
+                            dateList.map((item) => <MenuItem value={item} key={item}>{item}</MenuItem>)
+                            }
                         </Select>
-                    </FormControl>
-                }
+                </FormControl>
             </Box>
             <Box className={classes.btnGrp}>
                 {

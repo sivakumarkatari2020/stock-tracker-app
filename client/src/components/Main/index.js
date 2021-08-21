@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 function Main(props) {
 
     const classes = useStyles();
-    const {stock,date,stocks,dates,setDateValues,setStock,setDate,data,getData} = props;
+    const {stock,date,stocks,dates,setStock,setDate,data,getData} = props;
 
     return (
         <Box component="div" className={classes.main}>
@@ -35,7 +35,6 @@ function Main(props) {
                 date={date}
                 stockList={stocks}
                 dateList={dates}
-                setDateList={setDateValues}
                 selectedStock={setStock}
                 selectedDate={setDate}
                 getData={getData}

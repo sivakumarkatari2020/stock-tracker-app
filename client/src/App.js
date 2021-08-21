@@ -29,6 +29,18 @@ function App() {
   },[stock,date])
 
   useEffect(()=>{
+      axios.get(`http://localhost:5000/stockDates`)
+      .then((response)=> response.data)
+      .then((result)=>{
+          let arr = [];
+          for(let i=0;i<result.length;i++){
+              arr.push(result[i].start_date);
+          }
+          setDateValues(arr);
+      })
+  },[])
+
+  useEffect(()=>{
       axios.get('http://localhost:5000/stockNames')
       .then((response)=> response.data)
       .then((result)=>{
@@ -62,7 +74,6 @@ function App() {
               date={date}
               stocks={stocks}
               dates={dates}
-              setDateValues={setDateValues}
               setStock={setStock}
               setDate={setDate}
               data={data}

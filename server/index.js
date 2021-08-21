@@ -1,5 +1,4 @@
 const express = require('express');
-const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = require('./config/db');
@@ -41,9 +40,8 @@ app.get('/stockNames',(err,res)=>{
     })
 })
 
-app.get('/stockDates/:name',(req,res)=>{
-    let stock_name = req.params.name;
-    const sqlQuery = `SELECT distinct(start_date) FROM tbl_master_entries WHERE stock_name='${stock_name}' `;
+app.get('/stockDates/',(err,res)=>{
+    const sqlQuery = `SELECT distinct(start_date) FROM tbl_master_entries`;
     db.query(sqlQuery,(err,result)=>{
         if(err){
             console.log(err);
